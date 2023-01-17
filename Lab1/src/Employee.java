@@ -7,7 +7,7 @@ public class Employee {
   public String name;
   public String employeeId;
   public double hours;
-  private double rate;
+  private final double rate;
 
   /**
    * Constructs an Employee object and initializes it to the given name, employee ID, the number of
@@ -19,7 +19,7 @@ public class Employee {
    * @param rate the pay rate of this employee
    */
 
-  public Employee(String name, String employeeId, double hours, double rate) {
+  public Employee(String name, String employeeId, double rate) {
     this.name = name;
     this.employeeId = employeeId;
     this.hours = 0;
@@ -27,8 +27,10 @@ public class Employee {
   }
 
   /**
-   * Add the hours worked for the employee
+   * Add the hours worked for the employee.
+   *
    * @param hours hours worked in this week
+   *
    */
   public void addHoursWorked(Double hours) {
     this.hours += hours;
@@ -39,7 +41,7 @@ public class Employee {
   }
 
   /**
-   * Reset the hours worked to zero
+   * Reset the hours worked to zero.
    */
   public void resetHoursWorked() {
     this.hours = 0;
@@ -56,19 +58,18 @@ public class Employee {
   }
 
   /**
-   * Return weekly pay for the employee
+   * Return weekly pay for the employee.
    *
    * @return weekly pay for the employee
    */
 
   public Double getWeeklyCheck() {
     PayCheck payCheck = new PayCheck(hours, rate);
-    Double pay = Double.valueOf(Math.round(payCheck.getPayAfterTaxes()*100)/100);
-    return pay;
+    return (Double) (double) (Math.round(payCheck.getPayAfterTaxes() * 100) / 100);
   }
 
   /**
-   * Return string about employee's name, id and payment after taxes
+   * Return string about employee's name, id and payment after taxes.
    *
    * @return string about employee's name, id and payment after taxes
    */

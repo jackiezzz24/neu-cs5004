@@ -13,7 +13,7 @@ class EmployeeTest {
 
   @BeforeEach
   void setUp() {
-    clark = new Employee("Clark Kent", "SUPS-111", 0, 30);
+    clark = new Employee("Clark Kent", "SUPS-111", 30);
   }
 
   @Test
