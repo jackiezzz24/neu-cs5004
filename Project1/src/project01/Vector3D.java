@@ -1,3 +1,5 @@
+package project01;
+
 /**
  * This class represent a 3D vector. The 3D vector has x, y, and z.
  */
@@ -60,7 +62,7 @@ public class Vector3D {
    *
    * @return the magnitude of this vector
    */
-  public Double getMagnitude() {
+  public Double getMagnitude () {
     double mag;
     mag = Math.sqrt(x * x + y * y + z * z);
     return mag;
@@ -72,7 +74,7 @@ public class Vector3D {
    * @return a normalized version of this vector
    * @throws IllegalArgumentException if magnitude of vector is zero
    */
-  public Vector3D normalizedVector() throws IllegalStateException {
+  public Vector3D normalize () throws IllegalStateException {
     if (getMagnitude() == 0) {
       throw new IllegalStateException("The magnitude cannot be zero.");
     }
@@ -88,7 +90,7 @@ public class Vector3D {
    * @param vector3D The another vector
    * @return the result of adding this vector to another vector
    */
-  public Vector3D addVector(Vector3D vector3D) {
+  public Vector3D add (Vector3D vector3D) {
     return new Vector3D(x + vector3D.getX(),
                         y + vector3D.getY(),
                         z + vector3D.getZ());
@@ -100,7 +102,7 @@ public class Vector3D {
    * @param constant The multiplying constant
    * @return the result of multiplying this vector by a constant
    */
-  public Vector3D multiplyVector(int constant) {
+  public Vector3D multiply (double constant) {
     return new Vector3D(x * constant,
                         y * constant,
                         z * constant);
@@ -112,7 +114,7 @@ public class Vector3D {
    * @param vector3D The another Vector
    * @return the dot product of two vectors
    */
-  public double dotProductVectors(Vector3D vector3D) {
+  public double dotProduct (Vector3D vector3D) {
     return x * vector3D.getX()
             + y * vector3D.getY()
             + z * vector3D.getZ();
@@ -125,11 +127,11 @@ public class Vector3D {
    * @return the angle between two vectors in degree
    * @throws IllegalStateException if the magnitude of either vector is zero
    */
-  public double angleBetweenVectors(Vector3D vector3D) throws IllegalStateException {
+  public double angleBetween (Vector3D vector3D) throws IllegalStateException {
     if (getMagnitude() == 0 || vector3D.getMagnitude() == 0) {
       throw new IllegalStateException("Either of magnitudes cannot be 0.");
     }
-    double cosVector = dotProductVectors(vector3D) / (getMagnitude() * vector3D.getMagnitude());
+    double cosVector = dotProduct(vector3D) / (getMagnitude() * vector3D.getMagnitude());
     return Math.toDegrees(Math.acos(cosVector));
   }
 
@@ -139,7 +141,7 @@ public class Vector3D {
    * @param vector3D The another vector
    * @return the cross product of this vector and another vector
    */
-  public Vector3D crossProductVectors(Vector3D vector3D) {
+  public Vector3D crossProduct (Vector3D vector3D) {
     double crossProductX = y * vector3D.getZ() - z * vector3D.getY();
     double crossProductY = z * vector3D.getX() - x * vector3D.getZ();
     double crossProductZ = x * vector3D.getY() - y * vector3D.getX();

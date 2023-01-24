@@ -1,11 +1,12 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import project01.Vector3D;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * A JUnit test class for the Vector3D class.
+ * A JUnit test class for the project1.Vector3D class.
  */
 class Vector3DTest {
 
@@ -21,17 +22,17 @@ class Vector3DTest {
   }
 
   @Test
-  void testGetX() {
+  void getX() {
     assertEquals(5, v1.getX());
   }
 
   @Test
-  void testGetY() {
+  void getY() {
     assertEquals(2, v1.getY());
   }
 
   @Test
-  void testGetZ() {
+  void getZ() {
     assertEquals(10, v1.getZ());
   }
 
@@ -41,46 +42,46 @@ class Vector3DTest {
   }
 
   @Test
-  void testGetMagnitude() {
+  void getMagnitude() {
     assertEquals(11.3578, v1.getMagnitude(),0.01);
   }
 
   @Test
-  void testNormalizedVector() {
-    assertEquals("(0.44, 0.18, 0.88)", v1.normalizedVector().toString());
+  void normalize() {
+    assertEquals("(0.44, 0.18, 0.88)", v1.normalize().toString());
 
-    Exception ex = assertThrows(IllegalStateException.class, () -> v3.normalizedVector());
+    Exception ex = assertThrows(IllegalStateException.class, () -> v3.normalize());
     String expectedMsg = "The magnitude cannot be zero.";
     assertEquals(expectedMsg, ex.getMessage());
   }
 
   @Test
-  void testAddVector() {
-    assertEquals("(8.00, 6.00, 15.00)", v1.addVector(v2).toString());
+  void add() {
+    assertEquals("(8.00, 6.00, 15.00)", v1.add(v2).toString());
   }
 
   @Test
-  void testMultiplyVector() {
-    int constant = 3;
-    assertEquals("(15.00, 6.00, 30.00)", v1.multiplyVector(constant).toString());
+  void multiply() {
+    double constant = 3;
+    assertEquals("(15.00, 6.00, 30.00)", v1.multiply(constant).toString());
   }
 
   @Test
-  void testDotProductVectors() {
-    assertEquals(73, v1.dotProductVectors(v2) );
+  void dotProduct() {
+    assertEquals(73, v1.dotProduct (v2) );
   }
 
   @Test
-  void testAngleBetweenVectors() {
-    assertEquals(24.638, v1.angleBetweenVectors(v2), 0.01);
+  void angleBetween() {
+    assertEquals(24.638, v1.angleBetween(v2), 0.01);
 
-    Exception ex = assertThrows(IllegalStateException.class, () -> v1.angleBetweenVectors(v3));
+    Exception ex = assertThrows(IllegalStateException.class, () -> v1.angleBetween(v3));
     String expectedMsg = "Either of magnitudes cannot be 0.";
     assertEquals(expectedMsg, ex.getMessage());
   }
 
   @Test
-  void testCrossProductVectors() {
-    assertEquals("(-30.00, 5.00, 14.00)", v1.crossProductVectors(v2).toString());
+  void crossProduct() {
+    assertEquals("(-30.00, 5.00, 14.00)", v1.crossProduct (v2).toString());
   }
 }
