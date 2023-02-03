@@ -1,17 +1,11 @@
 package chess;
 
-public class Chess implements ChessPiece{
+public abstract class Chess implements ChessPiece{
 
-    private int row;
-    private int column;
-    private Color color;
+    private final int row;
+    private final int column;
+    private final Color color;
 
-    /**
-     * Constructs a default chess object
-     */
-    public Chess() {
-        this (0, 0, Color.BLACK);
-    }
 
     /**
      * Constructs a chess object and initializes it to the given row, column number and color.
@@ -22,12 +16,20 @@ public class Chess implements ChessPiece{
      */
 
     public Chess(int row, int column, Color color) {
+        if (row < 0 || row > 7 || column < 0 || column > 7) {
+            throw new IllegalArgumentException();
+        }
         this.row = row;
         this.column = column;
         this.color = color;
     }
 
-
+    /**
+     * Constructs a default chess object
+     */
+    public Chess() {
+        this (0, 0, Color.BLACK);
+    }
 
     /**
      * Return the current row of the chess piece.
@@ -68,7 +70,10 @@ public class Chess implements ChessPiece{
      */
     @Override
     public boolean canMove(int row, int col) {
-        return false;
+        if (row < 0 || row > 7 || col < 0 || col > 7) {
+            throw new IllegalArgumentException();
+        }
+        return !(row == this.row && col == this.column);
     }
 
     /**
@@ -80,6 +85,9 @@ public class Chess implements ChessPiece{
      */
     @Override
     public boolean canKill(ChessPiece piece) {
+        if (color != piece.getColor()) {
+            return canMove(piece.getRow(), piece.getColumn());
+        }
         return false;
     }
 }
