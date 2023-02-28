@@ -3,6 +3,9 @@ package chess;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test case for chess class
+ */
 class ChessTest {
 
     ChessPiece bishop;

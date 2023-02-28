@@ -2,6 +2,13 @@ package chess;
 
 public class Pawn extends Chess{
 
+    /**
+     * Constructs a Bishop object and initializes it to the given row, column number and color.
+     *
+     * @param row the initial row number of this chess
+     * @param col the initial column number of this chess
+     * @param color the color of this chess
+     */
     public Pawn(int row, int col, Color color) {
         super(row, col, color);
         if (color == Color.WHITE && row < 1) {
@@ -12,6 +19,13 @@ public class Pawn extends Chess{
         }
     }
 
+    /**
+     * Determine if the chess piece can move to a given cell.
+     *
+     * @param row the row where the piece might be moved to.
+     * @param col the column where the piece might be moved to.
+     * @return True if the piece can move to that location. False otherwise.
+     */
     @Override
     public boolean canMove(int row, int col) {
         if (super.canMove(row, col)) {
@@ -36,6 +50,13 @@ public class Pawn extends Chess{
         return false;
     }
 
+    /**
+     * Determine of the piece can kill another piece starting from its current
+     * location.
+     *
+     * @param piece the piece that might be killed.
+     * @return True if the new piece can be killed.
+     */
     @Override
     public boolean canKill(ChessPiece piece) {
         if (super.getColor() == Color.WHITE && super.getColor() != piece.getColor()) {
