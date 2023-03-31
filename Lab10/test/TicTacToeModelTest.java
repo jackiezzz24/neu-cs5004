@@ -32,9 +32,9 @@ public class TicTacToeModelTest {
         assertEquals(Player.X, ttt1.getWinner());
         assertEquals(" X | X | X\n"
                 + "-----------\n"
-                + " O | | \n"
+                + " O |   |  \n"
                 + "-----------\n"
-                + " O | | ", ttt1.toString());
+                + " O |   |  ", ttt1.toString());
     }
     @Test
     public void testDiagonalWin() {
@@ -43,9 +43,9 @@ public class TicTacToeModelTest {
         assertEquals(Player.O, ttt1.getWinner());
         assertEquals(" X | X | O\n"
                 + "-----------\n"
-                + " X | O | \n"
+                + " X | O |  \n"
                 + "-----------\n"
-                + " O | | ", ttt1.toString());
+                + " O |   |  ", ttt1.toString());;
     }
     // set up situation where game is over, O wins on the diagonal, board is not full
     private void diagonalWinHelper() {

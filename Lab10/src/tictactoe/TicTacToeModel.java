@@ -2,9 +2,13 @@ package tictactoe;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 public class TicTacToeModel implements TicTacToe {
+    private int moves;
+    Player player;
+    Player[][] board;
 
     public TicTacToeModel(){
-
+        moves = 0;
+        board = new Player[3][3];
     }
     // add your implementation here
     /**
@@ -18,7 +22,17 @@ public class TicTacToeModel implements TicTacToe {
      */
     @Override
     public void move(int r, int c) {
-
+        if (getMarkAt(r, c) != null) {
+            throw new IllegalArgumentException("Invalid move should have thrown exception");
+        }
+        if (r < 0 || c < 0 || r > 2 || c > 2) {
+            throw new IllegalArgumentException("Invalid move should have thrown exception");
+        }
+        if (isGameOver()) {
+            throw new IllegalStateException("Invalid move should have thrown exception");
+        }
+        board[r][c] = getTurn();
+        moves += 1;
     }
 
     /**
@@ -29,7 +43,11 @@ public class TicTacToeModel implements TicTacToe {
      */
     @Override
     public Player getTurn() {
-        return null;
+        if (moves % 2 == 0) {
+            return Player.X;
+        } else {
+            return Player.O;
+        }
     }
 
     /**
@@ -41,7 +59,7 @@ public class TicTacToeModel implements TicTacToe {
      */
     @Override
     public boolean isGameOver() {
-        return false;
+        return moves == 9 || getWinner() != null;
     }
 
     /**
@@ -53,6 +71,22 @@ public class TicTacToeModel implements TicTacToe {
      */
     @Override
     public Player getWinner() {
+        for (int i = 0; i < board.length; i++) {
+                if (getMarkAt(i, 0) == getMarkAt(i, 1) && getMarkAt(i, 1) == getMarkAt(i, 2)) {
+                    return getMarkAt(i, 0);
+                }
+        }
+        for (int j = 0; j < board[0].length; j++) {
+            if (getMarkAt(0, j) == getMarkAt(1, j) && getMarkAt(1, j) == getMarkAt(2, j)) {
+                return getMarkAt(0, j);
+            }
+        }
+        if (getMarkAt(0, 0) == getMarkAt(1, 1) && getMarkAt(1, 1) == getMarkAt(2, 2)) {
+            return getMarkAt(1, 1);
+        }
+        if (getMarkAt(0, 2) == getMarkAt(1, 1) && getMarkAt(1, 1) == getMarkAt(2, 0)) {
+            return getMarkAt(1, 1);
+        }
         return null;
     }
 
@@ -65,7 +99,13 @@ public class TicTacToeModel implements TicTacToe {
      */
     @Override
     public Player[][] getBoard() {
-        return new Player[0][];
+        Player[][] result = new Player[3][3];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                result[i][j] = board[i][j];
+            }
+        }
+        return result;
     }
 
     /**
@@ -79,7 +119,10 @@ public class TicTacToeModel implements TicTacToe {
      */
     @Override
     public Player getMarkAt(int r, int c) {
-        return null;
+        if (r < 0 || c < 0 || r > 2 || c > 2) {
+            throw new IllegalArgumentException("Invalid move should have thrown exception");
+        }
+        return board[r][c];
     }
 
     @Override
