@@ -5,6 +5,11 @@ public class Likert implements Question{
 
     /**
      * Constructs a Likert object and initializes it to the given question.
+     * Likert questions can be answered on a fixed, 5-point Likert scale
+     * (Strongly Agree, Agree, Neither Agree nor Disagree, Disagree, Strongly Disagree).
+     * Since this question asks an opinion, there is no "correct" answer.
+     * An answer can be entered as one of the option numbers, numbered from 1 in the above order.
+     * Any valid option number is a "correct" answer
      *
      * @param question question for this likert object
      */
@@ -15,6 +20,9 @@ public class Likert implements Question{
     /**
      * Determines if the answer is correct for a given question. If the answer is
      * correct, this method returns "Correct"; and "Incorrect" otherwise.
+     * Since this question asks an opinion, there is no "correct" answer.
+     * An answer can be entered as one of the option numbers, numbered from 1 in the above order.
+     * Any valid option number is a "correct" answer
      *
      * @param answer the answer given
      * @return "Correct" or "Incorrect"
@@ -40,36 +48,15 @@ public class Likert implements Question{
     }
 
     /**
-     * Compares this object with the specified object for order.  Returns a
-     * negative integer, zero, or a positive integer as this object is less
-     * than, equal to, or greater than the specified object.
-     *
-     * <p>The implementor must ensure {@link Integer#signum
-     * signum}{@code (x.compareTo(y)) == -signum(y.compareTo(x))} for
-     * all {@code x} and {@code y}.  (This implies that {@code
-     * x.compareTo(y)} must throw an exception if and only if {@code
-     * y.compareTo(x)} throws an exception.)
-     *
-     * <p>The implementor must also ensure that the relation is transitive:
-     * {@code (x.compareTo(y) > 0 && y.compareTo(z) > 0)} implies
-     * {@code x.compareTo(z) > 0}.
-     *
-     * <p>Finally, the implementor must ensure that {@code
-     * x.compareTo(y)==0} implies that {@code signum(x.compareTo(z))
-     * == signum(y.compareTo(z))}, for all {@code z}.
+     * Compares the question objects and order them based on expected ordering.
+     * All true/false questions should be before any multiple-choice questions.
+     * All multiple-choice questions should be before any multiple-select questions.
+     * All multiple-select questions should be before any Likert questions.
+     * Within a question type, they should be ordered in the lexicographical (dictionary) order of their question text.
      *
      * @param o the object to be compared.
      * @return a negative integer, zero, or a positive integer as this object
      * is less than, equal to, or greater than the specified object.
-     * @throws NullPointerException if the specified object is null
-     * @throws ClassCastException   if the specified object's type prevents it
-     *                              from being compared to this object.
-     * @apiNote It is strongly recommended, but <i>not</i> strictly required that
-     * {@code (x.compareTo(y)==0) == (x.equals(y))}.  Generally speaking, any
-     * class that implements the {@code Comparable} interface and violates
-     * this condition should clearly indicate this fact.  The recommended
-     * language is "Note: this class has a natural ordering that is
-     * inconsistent with equals."
      */
     @Override
     public int compareTo(Question o) {

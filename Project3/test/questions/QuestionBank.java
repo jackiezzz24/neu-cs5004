@@ -9,6 +9,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the question bank
+ */
 class QuestionBank {
     Question l1, l2;
     Question mc1, mc2;
