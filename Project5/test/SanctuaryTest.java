@@ -1,3 +1,4 @@
+import model.housing.Enclosures;
 import model.housing.Sanctuary;
 import model.monkey.Food;
 import model.monkey.Monkey;
@@ -5,6 +6,8 @@ import model.monkey.Sex;
 import model.monkey.Species;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -138,7 +141,29 @@ class SanctuaryTest {
                 + "There is no monkey in this enclosure space.\n";
         assertEquals(expected, sanctuary.monkeyListForEnclosure());
 
+    }
 
+    @Test
+    void monkeyListForGivenEnclosure() {
+        sanctuary.addToIsolation(monkey4);
+        sanctuary.addToIsolation(monkey5);
+        monkey4.setMedicalAttention(true);
+        monkey5.setMedicalAttention(true);
+        sanctuary.moveToEnclosure(monkey4);
+        sanctuary.moveToEnclosure(monkey5);
+        monkey4 = new Monkey("Lily", Species.Howler, Sex.F, 24.6, 13.5, 1, Food.Leaves);
+        monkey5 = new Monkey("Lisa", Species.Saki, Sex.F, 30.2, 23.1, 2, Food.Nuts);
+        String expected_Howler = "\nEnclosure - Howler:\n"
+                + "Name: Lily\n"
+                + "Sex: F\n"
+                + "Favorite Food: Leaves\n";
+        assertEquals(expected_Howler, sanctuary.monkeyListForGivenEnclosure(monkey4.getSpecies()));
+
+        String expected_Saki = "\nEnclosure - Saki:\n"
+                + "Name: Lisa\n"
+                + "Sex: F\n"
+                + "Favorite Food: Nuts\n";
+        assertEquals(expected_Saki, sanctuary.monkeyListForGivenEnclosure(monkey5.getSpecies()));
     }
 
     @Test

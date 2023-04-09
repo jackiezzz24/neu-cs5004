@@ -129,6 +129,32 @@ public class Sanctuary {
     }
 
     /**
+     * Return the monkey list housed in the given enclosure
+     * @return the monkey list housed in the given enclosure
+     */
+    public String monkeyListForGivenEnclosure(Species species) {
+        StringBuilder sb = new StringBuilder();
+        for (Enclosures enclosure: enclosures) {
+            List<Monkey> monkeysForGivenEnclosure = null;
+            if (enclosure.getSpecies() == species) {
+                monkeysForGivenEnclosure = enclosure.getMonkeys();
+                monkeysForGivenEnclosure.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+                sb.append("\nEnclosure - ").append(species).append(":\n");
+                if (monkeysForGivenEnclosure.size() < 1) {
+                    sb.append("There is no monkey in this enclosure space.\n");
+                } else {
+                    for (Monkey monkey : monkeysForGivenEnclosure) {
+                        sb.append("Name: ").append(monkey.getName()).append("\n")
+                                .append("Sex: ").append(monkey.getSex()).append("\n")
+                                .append("Favorite Food: ").append(monkey.getFavoriteFood()).append("\n");
+                    }
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
      * Return all the monkeys housed in the sanctuary in alphabetical order.
      * @return all the monkeys housed in the sanctuary in alphabetical order.
      */
