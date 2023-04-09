@@ -1,3 +1,5 @@
+package model.monkey;
+
 /**
  * An enumeration of different species of a monkey
  */
